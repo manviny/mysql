@@ -2,7 +2,7 @@
 
 ```mysql
 # sirve para acceder desde un terminal como root a mysql
-$ mysql -u root -p
+$ **mysql -u root -p**
 #sirve para mirar las bases de datos que tenemos
 $ SHOW DATABASES
 ```
