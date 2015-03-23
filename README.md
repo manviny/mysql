@@ -107,3 +107,115 @@ mysql> DELETE FROM mitabla WHERE micampo='DATO';
 
 
 ```
+```php
+<?php 
+
+	$servidor = "localhost";
+	$usuario = "marcadores";
+	$passw = "marcadores";
+	$basedatos = "marcadores";
+
+	/**
+	 * 	comenzar conexion
+	 */
+	$conexion = mysql_connect($servidor, $usuario, $passw);
+
+	// fallo la conexion
+	if(!$conexion){ die("No se ha podido conectar: " . mysql_error()); }
+
+
+	/**
+	 * 	Crear una BASE DE DATOS
+	 */
+	// if(mysql_query("CREATE DATABASE primeraBase", $conexion)){
+	// 	echo "Se ha creado la Base de Datos";
+	// }
+	// else {
+	// 	echo "No se ha podido crear la base de datos por el siguiente error: " . mysql_error();
+	// }
+
+
+	/**
+	 * 	Crear TABLAS en la base de datos
+	 */
+
+	// // 1.- seleccionar la base de datos
+	// mysql_select_db($basedatos, $conexion);
+
+	// // 2.- preparar comando
+	// $sql = "CREATE TABLE Agenda
+	// 	(
+	// 	personaID int NOT NULL AUTO_INCREMENT,
+	// 	PRIMARY KEY(personaID),
+	// 	Nombre varchar(15),
+	// 	Apellido varchar(15),
+	// 	Edad int,
+	// 	Telefono int
+	// 	)";
+	// // 3.- ejecutar la query
+	// mysql_query($sql, $conexion);
+
+
+
+	/**
+	 * 	Crear REGISTROS en la base de datos
+	 */
+
+	// 1.- seleccionar la base de datos
+	mysql_select_db($basedatos, $conexion);
+
+	// 2.- crea consulta
+    $sql = "
+    	INSERT INTO Agenda (Nombre, Apellido, Edad, Telefono)
+    	VALUES ('Luis', 'Este', 21, 666777888) ";
+	
+	// 3.- ejecuta la consulta
+	//mysql_query($sql, $conexion);
+
+
+
+	/**
+	 * 	LISTAR REGISTROS de la base de datos
+	 */
+	mysql_select_db($basedatos, $conexion);
+
+	$sql = "SELECT * FROM Agenda";
+
+	$peticion = mysql_query($sql, $conexion);
+
+	while($fila = mysql_fetch_array($peticion)){
+		echo $fila['Nombre']." ". $fila['Apellido']." ". $fila['Edad']." ". $fila['Telefono']."<br>";
+	}
+
+
+	/**
+	 * 	CONSULTAR REGISTROS de la base de datos
+	 */
+	mysql_select_db($basedatos, $conexion);
+
+	$sql = "SELECT * FROM Agenda WHERE Nombre='Manol'";
+
+	$peticion = mysql_query($sql, $conexion);
+
+	while($fila = mysql_fetch_array($peticion)){
+		echo $fila['Nombre']." ". $fila['Apellido']." ". $fila['Edad']." ". $fila['Telefono']."<br>";
+	}
+
+
+	/**
+	 * 	UPDATE Agenda SET Edad = '24' WHERE Nombre = 'Manol' AND Apellido = 'Vidal'
+	 */
+
+	/**
+	 * 	DELETE FROM Agenda  WHERE Nombre = 'Manol' AND Apellido = 'Vidal'
+	 */
+
+
+	/**
+	* 	terminar conexion
+	*/
+	mysql_close($conexion);
+
+
+ ?>
+ ```
