@@ -100,7 +100,7 @@ IS NOT NULL
 mysql> INSERT INTO mitabla (first_name, last_name, gender, hire_date, birth_date) VALUES('Efren','Moreno','M',2015-02-26',1993-11-20);
 
 #Cambiar datos en la tabla.
-mysql> UPTADE mitabla SET micampo='2015-02-26', micampo'1993-11-20' WHERE micampo='Nombre';
+mysql> UPDATE mitabla SET micampo='2015-02-26', micampo='1993-11-20' WHERE micampo='Nombre';
 
 #Eliminar datos de la tabla
 mysql> DELETE FROM mitabla WHERE micampo='DATO';
