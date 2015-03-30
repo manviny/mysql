@@ -219,3 +219,78 @@ mysql> DELETE FROM mitabla WHERE micampo='DATO';
 
  ?>
  ```
+ 
+ 
+ 
+ ** Pasar datos de PHP a JS
+ ```PHP
+ <?php 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	// DATOS PARA CONECTAR CON LA BASE DE DATOS
+	$servidor = "localhost";
+	$usuario = "marcadores";
+	$passw = "marcadores";
+	$basedatos = "marcadores";
+
+
+	// 1.-Conectar con la BD
+	$conexion = mysql_connect($servidor, $usuario, $passw);
+	if(!$conexion){ 
+		die("No se ha podido conectar: " . mysql_error()); 
+	}
+	else {
+		echo "conectados a la BD"
+	}
+
+	// 2.- Seleccionar la BD con la que vamos a trabajar
+	mysql_select_db($basedatos, $conexion);	
+
+
+	// 3.- Crear la consulta
+    $sql = "
+    	SELECT * FROM usuarios WHERE DNI='12345678'  
+    	";
+
+    // 4.- Ejecutar la consulta
+	$peticion = mysql_query($sql, $conexion);
+
+
+	// 5.- ver resultados
+	while( $fila = mysql_fetch_array($peticion) ){
+		$dni = $fila['DNI'];
+		$nombre = $fila['nombre'];
+		$email = $fila['email'];
+		$direccion = $fila['direccion'];
+	}
+
+	// 6.- Pasar las variables de PHP a Javascript
+
+	echo "<script>
+			var dni = '$dni';			
+            var nombre = '$nombre';
+		</script>";
+
+?>
+
+
+	<!-- 7.- Usar las variables recien creadas -->
+	<script type="text/javascript">
+
+	$(docu ment).ready(function(){
+
+		alert(dni);
+		$("#dni").val(dni);
+
+
+	})
+
+	</script>
+
+
+	<form>
+		<input type="text" name="dni"  placeholer="tu DNI" id="dni">
+	</form>
+ ```
+ 
+ 
